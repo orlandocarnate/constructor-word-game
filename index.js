@@ -10,7 +10,6 @@ var word = new Word;
 // prompt user for each guess and keep track
 // of the remaining guesses
 
-// Prompt the user to provide location information.
 inquirer.prompt([
 
     {
@@ -19,7 +18,7 @@ inquirer.prompt([
         message: "Guess a letter: "
     }
 
-    // After the prompt, store the user's response in a variable called location.
+    // After the prompt, store the user's response in char.
 ]).then(function (char) {
     console.log("prompt: ", char.userInput);
     // send input char to Word.checkChar(char)
