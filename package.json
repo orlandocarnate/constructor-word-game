@@ -1,0 +1,22 @@
+{
+  "name": "constructor-word-game",
+  "version": "1.0.0",
+  "description": "node.js word guessing game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/orlandocarnate/constructor-word-game.git"
+  },
+  "author": "Orlando Carnate",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/orlandocarnate/constructor-word-game/issues"
+  },
+  "homepage": "https://github.com/orlandocarnate/constructor-word-game#readme",
+  "dependencies": {
+    "inquirer": "^6.2.2"
+  }
+}
