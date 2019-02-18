@@ -4,16 +4,16 @@ var Letter = require("./letter");
 
 var Word = function () {
     // array of letter OBJECTS of current word
-    this.wordObjects = {};
+    this.wordObjects = [];
 
     this.createObjects = function (word) {
         var tempArray = word.split("");
         for (var i = 0; i < tempArray.length; i++) {
             this.wordObjects[i] = new Letter(tempArray[i]);
             // console.log(tempArray[i]);
-            console.log(this.wordObjects[i].underlyingChar, this.wordObjects.guessChar);
+            // console.log(this.wordObjects[i].underlyingChar, this.wordObjects.guessChar);
         }
-        console.log("wordObjects: ", this.wordObjects);
+        // console.log("wordObjects: ", this.wordObjects);
         return;
     }
 
@@ -32,5 +32,5 @@ var Word = function () {
 
 // export
 module.exports = Word;
-testWord = new Word();
-testWord.createObjects("test");
+// testWord = new Word();
+// testWord.createObjects("test");

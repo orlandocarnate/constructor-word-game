@@ -27,7 +27,14 @@ function randomize() {
 };
 
 // assign randomword to currentWord.wordArray
-var currentWord = new Word(randomize());
+var currentWord = new Word();
+currentWord.createObjects(randomize());
+// send currentWord to Word
+// console.log(currentWord.wordObjects[0]);
+
+for (var i = 0; i < currentWord.wordObjects.length; i++) {
+    console.log("yo: ", currentWord.wordObjects[i].underlyingChar, currentWord.wordObjects[i].guessedChar);
+}
 
 // displays game status
 function displayStatus(guessWord) {
@@ -40,9 +47,12 @@ function displayStatus(guessWord) {
 
 }
 
-displayStatus(currentWord.wordArray);
+// displayStatus(currentWord.wordArray);
+
+
 // prompt user for each guess and keep track
 // of the remaining guesses
+/*
 inquirer.prompt([
 
     {
@@ -53,12 +63,11 @@ inquirer.prompt([
 
     // After the prompt, store the user's response in char.
 ]).then(function (char) {
-    /*
     console.log("prompt: ", char.userInput);
     // send input char to Word.checkChar(char)
-    */
     displayStatus(currentWord.wordArray);
     console.log("Current word: ", currentWord.wordArray)
     //    currentWord.checkChar(char.userInput);
     console.log("You entered: ", char.userInput);
 });
+*/
