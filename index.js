@@ -2,45 +2,47 @@
 // which imports Letter that is exported from letter.js
 var Word = require("./word");
 var inquirer = require("inquirer");
+var title = [
+    "=================================================================================",
+    " _    _               _   _____                       _____                       ",
+    "| |  | |             | | |  __ \\                     |  __ \\                      ",
+    "| |  | | ___  _ __ __| | | |  \\/_   _  ___  ___ ___  | |  \\/ __ _ _ __ ___   ___  ",
+    "| |/\\| |/ _ \\| '__/ _` | | | __| | | |/ _ \\/ __/ __| | | __ / _` | '_ ` _ \\ / _ \\ ",
+    "\\  /\\  / (_) | | | (_| | | |_\\ \\ |_| |  __/\\__ \\__ \\ | |_\\ \\ (_| | | | | | |  __/ ",
+    " \\/  \\/ \\___/|_|  \\__,_|  \\____/\\__,_|\\___||___/___/  \\____/\\__,_|_| |_| |_|\\___| ",
+    "================================================================================="
+]
 
-var word = new Word;
 // randomly choose word and store in Word.letters array
-
 var wordList =
     ['html', 'css', 'alphabet', 'prestige', 'javascript',
         'jquery', 'bootstrap', 'flexbox', 'coding', 'developer',
         'programmer'];
 
-// FROM OLDER HOMEWORK
 // Pick random word from wordList
 function randomize() {
-    // reset already guessed letters
-    alreadyGuessedArray = [];
-    alreadyGuessedID.textContent = "NONE";
-
-    // pick a random word from the wordList
-    randomWord = wordList[Math.floor(Math.random() * wordList.length)];
-    console.log("random word: " + randomWord);
-
-    // assign randomWord length to guessCount
-    guessCount = 7;
-    // guessCount = randomWord.length;
-    guessCountID.textContent = guessCount;
-
-    // create a variable with underlines and spaces.
-    fillInTheBlank = '';
-    for (i = 0; i < randomWord.length; i++) {
-        fillInTheBlank += '_';
-    }
-    fillInTheBlank = fillInTheBlank.split('').join(' ');
-
-    console.log("Word array: " + fillInTheBlank);
-    fillInTheBlankID.textContent = fillInTheBlank;
+    // pick a random word from the wordList and return it
+    var randomWord = wordList[Math.floor(Math.random() * wordList.length)];
+    return randomWord;
 };
 
+// assign randomword to currentWord.wordArray
+var currentWord = new Word(randomize());
+
+// displays game status
+function displayStatus(guessWord) {
+    console.log('\033[2J'); // clears screen
+    console.log(title.join("\n"));
+    var statusLine = "\n\n\t" + guessWord.join(" ").toUpperCase() + "\n\n";
+    statusLine += "\tLetters used: " + "A, B, C, D, E" + "\n";
+    statusLine += "\tGuesses left: " + "3" + "\n";
+    console.log(statusLine);
+
+}
+
+displayStatus(currentWord.wordArray);
 // prompt user for each guess and keep track
 // of the remaining guesses
-
 inquirer.prompt([
 
     {
@@ -51,8 +53,12 @@ inquirer.prompt([
 
     // After the prompt, store the user's response in char.
 ]).then(function (char) {
+    /*
     console.log("prompt: ", char.userInput);
     // send input char to Word.checkChar(char)
-    word.checkChar(char.userInput);
-    // console.log("You entered: ", data);
+    */
+    displayStatus(currentWord.wordArray);
+    console.log("Current word: ", currentWord.wordArray)
+    //    currentWord.checkChar(char.userInput);
+    console.log("You entered: ", char.userInput);
 });

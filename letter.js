@@ -1,10 +1,15 @@
-var Letter = function () {
+var Letter = function (underlyingChar) {
     // either a char or blank placeholder
-    this.wordChar = wordChar; 
+    this.underlyingChar = underlyingChar; 
     this.guessedChar = false;
-    this.showChar = function() {
+    this.showChar = function(arg) {
         // if correct then show
-        // else show placeholder '_'
+        if (guessedChar) {
+            return this.underlyingChar;
+        }
+        else {
+            return "_";
+        }
     };
     this.checkChar = function(arg) {
         // if the guessed char === wordChar
