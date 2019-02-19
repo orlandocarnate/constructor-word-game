@@ -4,7 +4,7 @@ var Letter = function (underlyingChar) {
     this.guessedChar = false;
     this.showChar = function(arg) {
         // if correct then show
-        if (guessedChar) {
+        if (this.guessedChar) {
             return this.underlyingChar;
         }
         else {

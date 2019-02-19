@@ -32,22 +32,30 @@ currentWord.createObjects(randomize());
 // send currentWord to Word
 // console.log(currentWord.wordObjects[0]);
 
-for (var i = 0; i < currentWord.wordObjects.length; i++) {
-    console.log("yo: ", currentWord.wordObjects[i].underlyingChar, currentWord.wordObjects[i].guessedChar);
-}
 
 // displays game status
-function displayStatus(guessWord) {
+function displayStatus(argArray) {
+    var displayWordArray = [];
+    argArray.wordObjects.forEach(function(arg) {
+        displayWordArray.push(arg.showChar());
+        console.log(arg.showChar());
+    });
+    var displayWord = displayWordArray.join(" ").toUpperCase();
     console.log('\033[2J'); // clears screen
     console.log(title.join("\n"));
-    var statusLine = "\n\n\t" + guessWord.join(" ").toUpperCase() + "\n\n";
+    var statusLine = "\n\n\t" + displayWord + "\n\n";
     statusLine += "\tLetters used: " + "A, B, C, D, E" + "\n";
     statusLine += "\tGuesses left: " + "3" + "\n";
     console.log(statusLine);
-
+    
 }
 
-// displayStatus(currentWord.wordArray);
+// test if returns are correct
+// for (var i = 0; i < currentWord.wordObjects.length; i++) {
+//     console.log("yo: ", currentWord.wordObjects[i].underlyingChar, currentWord.wordObjects[i].guessedChar);
+// }
+
+displayStatus(currentWord);
 
 
 // prompt user for each guess and keep track
