@@ -52,8 +52,8 @@ function displayStatus(argArray) {
 
 var game = {
     validInput: function (char) {
-        if ((char.charCodeAt(0) >= 65 && char.charCodeAt(0) <= 90) ||
-            (char.charCodeAt(0) >= 97 && char.charCodeAt(0) <= 122)) {
+        if (char.length === 1 && ((char.charCodeAt(0) >= 65 && char.charCodeAt(0) <= 90) ||
+            (char.charCodeAt(0) >= 97 && char.charCodeAt(0) <= 122))) {
             return true;
         } else {
             return false;
@@ -89,6 +89,14 @@ var game = {
             // run game logic
             game.compareInput(char.userInput);
         });
+    },
+
+    playAgain: function (arg) {
+        if (arg.toUpperCase === 'Y') {
+            this.runInquirer();
+        } else {
+            process.exit();
+        }
     }
 
 }
