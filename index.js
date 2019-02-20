@@ -21,9 +21,9 @@ var title = [
 
 // randomly choose word and store in Word.letters array
 var wordList =
-    ['html', 'css', 'alphabet', 'prestige', 'javascript',
-        'jquery', 'bootstrap', 'flexbox', 'coding', 'developer',
-        'programmer'];
+    ['word', 'game', 'node', 'react', 'html', 'css', 'alphabet', 'prestige', 'javascript',
+        'jquery', 'bootstrap', 'flexbox', 'coding', 'developer', 'programmer', 'computer',
+    'keyboard', 'mouse', 'monitor', 'tablet', 'smartphone'];
 // var wordList =
 //     ['html', 'css'];
 
@@ -52,8 +52,8 @@ var game = {
         });
         var displayWord = displayWordArray.join(" ").toUpperCase();
         console.log('\033[2J'); // clears screen
-        console.log("\t" + title.join("\n\t"));
-        var statusLine = "\n\n\t\t" + displayWord + "\n\n";
+        var statusLine = "\t" + title.join("\n\t");
+        statusLine += "\n\n\t\t" + displayWord + "\n\n";
         statusLine += "\t\tLetters Guessed: " + guessedArray.join(", ") + "\n";
         statusLine += "\t\tGuesses left: " + guesses + "\n";
         statusLine += "\n\t\t" + feedback + "\n\n"
@@ -97,8 +97,8 @@ var game = {
 
             // check if player got all the letters using .every()
             if (currentWord.wordObjects.every(function (element) { return element.guessedChar })) {
-                
-                feedback = "YOU WON!";
+
+                feedback = "YOU GOT IT! It was " + randomWord.toUpperCase();
                 game.startGame();
                 return;
             }
@@ -168,10 +168,7 @@ var game = {
 
 }
 
-// displayStatus();
-// console.log(currentWord);
 game.startGame();
-// prompt user for each guess and keep track
-// of the remaining guesses
+
 
 
