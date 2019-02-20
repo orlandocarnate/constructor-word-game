@@ -2,6 +2,20 @@
 A Word Guess command-line game using constructor functions using Node.js with Inquirer or Prompt NPMs installed.
 
 ## Programmer's Notes
+* .every() [w3schools](https://www.w3schools.com/jsref/jsref_every.asp)
+    * If every word letter object is *TRUE* then you win.
+    EX:
+        `array.object.every(true);`
+
+        ```
+        // check if player got all the letters
+        if (currentWord.wordObjects.every(function(element) {
+            return element.guessedChar;
+        })) {
+            game.youWon();
+            };
+        ```
+
 * using `.forEach()` for array of objects:
 ```
 function displayStatus(argArray) {

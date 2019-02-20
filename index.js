@@ -1,8 +1,13 @@
 // import Word that is exported from word.js,
 // which imports Letter that is exported from letter.js
 var Word = require("./word");
+var currentWord = new Word();
 var inquirer = require("inquirer");
+var inquirer2 = require("inquirer");
 var guessedArray = [];
+var randomWord = '';
+var guesses = 7;
+var feedback = '';
 var title = [
     "=================================================================================",
     " _    _               _   _____                       _____                       ",
@@ -19,43 +24,55 @@ var wordList =
     ['html', 'css', 'alphabet', 'prestige', 'javascript',
         'jquery', 'bootstrap', 'flexbox', 'coding', 'developer',
         'programmer'];
-
-// Pick random word from wordList
-function randomize() {
-    // pick a random word from the wordList and return it
-    var randomWord = wordList[Math.floor(Math.random() * wordList.length)];
-    return randomWord;
-};
-
-// assign randomword to currentWord.wordArray
-var currentWord = new Word();
-currentWord.createObjects(randomize());
-// send currentWord to Word
-// console.log(currentWord.wordObjects[0]);
-
-
-// displays game status
-function displayStatus(argArray) {
-    var displayWordArray = [];
-    argArray.wordObjects.forEach(function (arg) {
-        displayWordArray.push(arg.showChar());
-    });
-    var displayWord = displayWordArray.join(" ").toUpperCase();
-    console.log('\033[2J'); // clears screen
-    console.log("\t" + title.join("\n\t"));
-    var statusLine = "\n\n\t" + displayWord + "\n\n";
-    statusLine += "\tLetters Guessed: " + guessedArray.join(", ") + "\n";
-    statusLine += "\tGuesses left: " + "3" + "\n";
-    console.log(statusLine);
-
-}
+// var wordList =
+//     ['html', 'css'];
 
 var game = {
+
+    startGame: function () {
+        guessedArray = [];
+        randomWord = '';
+        guesses = 7;
+        currentWord.wordObjects = [];
+        currentWord.createObjects(this.randomize());
+        this.displayStatus();
+        this.runInquirer();
+    },
+
+    randomize: function () {
+        // pick a random word from the wordList and return it
+        randomWord = wordList[Math.floor(Math.random() * wordList.length)];
+        return randomWord;
+    },
+
+    displayStatus: function () {
+        var displayWordArray = [];
+        currentWord.wordObjects.forEach(function (arg) {
+            displayWordArray.push(arg.showChar());
+        });
+        var displayWord = displayWordArray.join(" ").toUpperCase();
+        console.log('\033[2J'); // clears screen
+        console.log("\t" + title.join("\n\t"));
+        var statusLine = "\n\n\t\t" + displayWord + "\n\n";
+        statusLine += "\t\tLetters Guessed: " + guessedArray.join(", ") + "\n";
+        statusLine += "\t\tGuesses left: " + guesses + "\n";
+        statusLine += "\n\t\t" + feedback + "\n\n"
+        console.log(statusLine);
+
+    },
+
     validInput: function (char) {
         if (char.length === 1 && ((char.charCodeAt(0) >= 65 && char.charCodeAt(0) <= 90) ||
             (char.charCodeAt(0) >= 97 && char.charCodeAt(0) <= 122))) {
-            return true;
+            // check if char is already guessed
+            if (guessedArray.indexOf(char.toUpperCase()) === -1) {
+                return true;
+            } else {
+                feedback = "You picked that letter already!"
+                return false;
+            }
         } else {
+            feedback = "Sorry, invalid entry."
             return false;
         }
     },
@@ -63,47 +80,97 @@ var game = {
     compareInput: function (arg) {
         // validate the input by getting first char
         if (this.validInput(arg)) {
-            console.log("You entered a valid character");
+            feedback = "You entered a valid character";
+
+            var found = false;
             // compare each object in word array with user input
+            currentWord.wordObjects.forEach(function (element) {
+                // skip existing letters that are true
+                if (element.guessedChar === false) {
+                    element.checkChar(arg);
+                    // set found to true if match is found
+                    if (element.guessedChar) {
+                        found = true;
+                    }
+                }
+            });
+
+            // check if player got all the letters using .every()
+            if (currentWord.wordObjects.every(function (element) { return element.guessedChar })) {
+                
+                feedback = "YOU WON!";
+                game.startGame();
+                return;
+            }
+            if (found === false) {
+                // reduce guesses if no match
+                guesses--;
+                if (guesses === 0) {
+                    feedback = "Sorry! Answer is " + randomWord.toUpperCase();
+                    game.startGame();
+                    return;
+                }
+            } else {
+                found = false; // reset flag
+            }
+
+            // if arg is not in guessedArray then add to guess array
+            guessedArray.push(arg.toUpperCase());
+            this.displayStatus();
             this.runInquirer();
+
         } else {
-            console.log("Sorry invalid input");
+            this.displayStatus();
             this.runInquirer();
         }
 
     },
 
     runInquirer: function () {
-        inquirer.prompt([
-
-            {
-                type: "input",
-                name: "userInput",
-                message: "Guess a letter: "
-            }
-
-            // After the prompt, store the user's response in char.
-        ]).then(function (char) {
-            console.log("prompt: ", char.userInput);
-            displayStatus(currentWord);
-            // run game logic
-            game.compareInput(char.userInput);
+        inquirer.prompt([{
+            type: "input",
+            name: "userInput",
+            message: "Guess a letter: "
+        }]).then(function (answer) {
+            game.compareInput(answer.userInput);
         });
     },
 
-    playAgain: function (arg) {
-        if (arg.toUpperCase === 'Y') {
-            this.runInquirer();
-        } else {
-            process.exit();
-        }
+    gameOver: function () {
+        feedback = "Game Over! Answer is " + randomWord.toUpperCase();
+        this.displayStatus();
+        game.startGame();
+        // process.exit();
+    },
+
+    youWon: function () {
+        feedback = "YOU WON!";
+        this.displayStatus();
+        game.startGame();
+        // process.exit();
+    },
+
+    playAgain: function () {
+        inquirer2.prompt([
+            {
+                type: 'confirm',
+                name: 'playAgain',
+                message: 'Do you want to play again? (press enter for YES)',
+                default: true
+            }
+        ]).then(function (answers) {
+            if (answers.playAgain === true) {
+
+                game.startGame();
+            }
+        });
     }
 
 }
 
-displayStatus(currentWord);
-
-game.runInquirer();
+// displayStatus();
+// console.log(currentWord);
+game.startGame();
 // prompt user for each guess and keep track
 // of the remaining guesses
 

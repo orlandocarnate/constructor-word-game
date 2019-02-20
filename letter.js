@@ -13,8 +13,9 @@ var Letter = function (underlyingChar) {
     };
     this.checkChar = function(arg) {
         // if the guessed char === wordChar
-        if (arg) {
+        if (this.underlyingChar.toUpperCase() === arg.toUpperCase()) {
             this.guessedChar = true;
+            return true;
         }
     }
 
