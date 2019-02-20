@@ -13,7 +13,9 @@ var Letter = function (underlyingChar) {
     };
     this.checkChar = function(arg) {
         // if the guessed char === wordChar
-            // then set guessedChar = true
+        if (arg) {
+            this.guessedChar = true;
+        }
     }
 
 
