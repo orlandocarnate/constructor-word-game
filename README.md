@@ -1,6 +1,11 @@
 # constructor-word-game
 A Word Guess command-line game using constructor functions using Node.js with Inquirer or Prompt NPMs installed.
 
+# NPM Modules Used
+* [Inquirer](https://www.npmjs.com/package/inquirer) A collection of common interactive command line user interfaces.
+* [Figlet](https://www.npmjs.com/package/figlet) for creating FIGfonts or ASCII art [Check online demo](http://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20)
+* [Chalk](https://www.npmjs.com/package/chalk) adds color to the console.
+
 ## Programmer's Notes
 
 * .every() [w3schools](https://www.w3schools.com/jsref/jsref_every.asp)
@@ -20,7 +25,7 @@ A Word Guess command-line game using constructor functions using Node.js with In
 * using `.forEach()` for array of objects:
 ```
 function displayStatus(argArray) {
-    var displayWordArray = [];
+    var displayWordArray = [];      
     argArray.wordObjects.forEach(function(arg) {
         displayWordArray.push(arg.showChar());
         console.log(arg.showChar());
