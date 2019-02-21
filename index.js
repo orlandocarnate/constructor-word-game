@@ -11,22 +11,22 @@ let randomWord = '';
 let guesses = 7;
 let feedback = '';
 const dash = chalk.red(" =====================================================================================");
-const title = [
-    " _    _               _   _____                       _____                       ",
-    "| |  | |             | | |  __ \\                     |  __ \\                      ",
-    "| |  | | ___  _ __ __| | | |  \\/_   _  ___  ___ ___  | |  \\/ __ _ _ __ ___   ___  ",
-    "| |/\\| |/ _ \\| '__/ _` | | | __| | | |/ _ \\/ __/ __| | | __ / _` | '_ ` _ \\ / _ \\ ",
-    "\\  /\\  / (_) | | | (_| | | |_\\ \\ |_| |  __/\\__ \\__ \\ | |_\\ \\ (_| | | | | | |  __/ ",
-    " \\/  \\/ \\___/|_|  \\__,_|  \\____/\\__,_|\\___||___/___/  \\____/\\__,_|_| |_| |_|\\___| "
-]
+// const title = [
+//     " _    _               _   _____                       _____                       ",
+//     "| |  | |             | | |  __ \\                     |  __ \\                      ",
+//     "| |  | | ___  _ __ __| | | |  \\/_   _  ___  ___ ___  | |  \\/ __ _ _ __ ___   ___  ",
+//     "| |/\\| |/ _ \\| '__/ _` | | | __| | | |/ _ \\/ __/ __| | | __ / _` | '_ ` _ \\ / _ \\ ",
+//     "\\  /\\  / (_) | | | (_| | | |_\\ \\ |_| |  __/\\__ \\__ \\ | |_\\ \\ (_| | | | | | |  __/ ",
+//     " \\/  \\/ \\___/|_|  \\__,_|  \\____/\\__,_|\\___||___/___/  \\____/\\__,_|_| |_| |_|\\___| "
+// ]
 
 // randomly choose word and store in Word.letters array
-const wordList =
-    ['word', 'game', 'node', 'react', 'html', 'css', 'alphabet', 'prestige', 'javascript',
-        'jquery', 'bootstrap', 'flexbox', 'coding', 'developer', 'programmer', 'computer',
-    'keyboard', 'mouse', 'monitor', 'tablet', 'smartphone'];
-// var wordList =
-//     ['html', 'css'];
+// const wordList =
+//     ['word', 'game', 'node', 'react', 'html', 'css', 'alphabet', 'prestige', 'javascript',
+//         'jquery', 'bootstrap', 'flexbox', 'coding', 'developer', 'programmer', 'computer',
+//     'keyboard', 'mouse', 'monitor', 'tablet', 'smartphone'];
+var wordList =
+    ['one two', 'css'];
 
 const game = {
 
@@ -48,11 +48,6 @@ const game = {
 
     displayStatus: function () {
         var displayWordArray = [];
-        // move this to Word.getString()
-        // currentWord.wordObjects.forEach(function (arg) {
-        //     displayWordArray.push(arg.getString());
-        // });
-        // var displayWord = displayWordArray.join(" ").toUpperCase();
         console.log('\033[2J'); // clears screen
         console.log("\n" + dash + "\n\n");
         console.log(chalk.yellow(figlet.textSync('Word Guess Game!', {
@@ -67,7 +62,7 @@ const game = {
         statusLine += "\t\tLetters Guessed: " + guessedArray.join(", ") + "\n";
         statusLine += "\t\tGuesses left: " + guesses + "\n";
         statusLine += "\n\t\t" + feedback + "\n\n"
-        console.log(statusLine);
+        console.log(statusLine); // display status section
 
     },
 
@@ -93,6 +88,8 @@ const game = {
             feedback = "You entered a valid character";
 
             var found = false;
+
+            // ******* CONVERT TO .some() OR .find() *******
             // compare each object in word array with user input
             currentWord.wordObjects.forEach(element => {
                 // skip existing letters that are true
@@ -107,12 +104,13 @@ const game = {
 
             // check if player got all the letters using .every()
             if (currentWord.wordObjects.every(function (element) { return element.guessedChar })) {
-
                 feedback = "YOU GOT IT! It was " + randomWord.toUpperCase();
                 this.displayStatus();
                 game.playAgain();
                 return;
             }
+            
+            // see if any matches are found
             if (found === false) {
                 // reduce guesses if no match
                 guesses--;

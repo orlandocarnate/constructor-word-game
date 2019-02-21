@@ -6,12 +6,15 @@ var Letter = function (underlyingChar) {
         // if correct then show
         if (this.guessedChar) {
             return this.underlyingChar;
+        } else if (this.underlyingChar === ' ') {
+            this.guessedChar = true;
+            return " ";
         }
         else {
             return "_";
         }
     };
-    this.checkChar = function(arg) {
+    this.checkChar = arg => {
         // if the guessed char === wordChar
         if (this.underlyingChar.toUpperCase() === arg.toUpperCase()) {
             this.guessedChar = true;

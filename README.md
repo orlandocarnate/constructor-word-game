@@ -22,6 +22,8 @@ A Word Guess command-line game using constructor functions using Node.js with In
             };
         ```
 
+...
+
 * using `.forEach()` for array of objects:
 ```
 function displayStatus(argArray) {
@@ -30,9 +32,10 @@ function displayStatus(argArray) {
         displayWordArray.push(arg.showChar());
         console.log(arg.showChar());
     });
-...
 }
 ```
+### Other higher order methods to try:
+* .map(), .filter(), .find(), .some(), .every(), .findIndex()
 
 ## Other methods to try:
 
