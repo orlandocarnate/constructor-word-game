@@ -2,7 +2,7 @@ var Letter = function (underlyingChar) {
     // either a char or blank placeholder
     this.underlyingChar = underlyingChar; 
     this.guessedChar = false;
-    this.showChar = function(arg) {
+    this.showChar = function() {
         // if correct then show
         if (this.guessedChar) {
             return this.underlyingChar;

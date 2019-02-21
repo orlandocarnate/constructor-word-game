@@ -48,10 +48,11 @@ const game = {
 
     displayStatus: function () {
         var displayWordArray = [];
-        currentWord.wordObjects.forEach(function (arg) {
-            displayWordArray.push(arg.showChar());
-        });
-        var displayWord = displayWordArray.join(" ").toUpperCase();
+        // move this to Word.getString()
+        // currentWord.wordObjects.forEach(function (arg) {
+        //     displayWordArray.push(arg.getString());
+        // });
+        // var displayWord = displayWordArray.join(" ").toUpperCase();
         console.log('\033[2J'); // clears screen
         console.log("\n" + dash + "\n\n");
         console.log(chalk.yellow(figlet.textSync('Word Guess Game!', {
@@ -62,7 +63,7 @@ const game = {
         })));
         // statusLine += "\t" + chalk.yellow(title.join("\n\t"));
         var statusLine = "\n" + dash + "\n";
-        statusLine += "\n\n\t\t" + displayWord + "\n\n";
+        statusLine += "\n\n\t\t" + currentWord.getString() + "\n\n";
         statusLine += "\t\tLetters Guessed: " + guessedArray.join(", ") + "\n";
         statusLine += "\t\tGuesses left: " + guesses + "\n";
         statusLine += "\n\t\t" + feedback + "\n\n"
