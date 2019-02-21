@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/orlandocarnate/constructor-word-game#readme",
   "dependencies": {
+    "chalk": "^2.4.2",
+    "figlet": "^1.2.1",
     "inquirer": "^6.2.2"
   }
 }

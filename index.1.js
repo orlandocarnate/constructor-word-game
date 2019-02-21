@@ -5,12 +5,12 @@ var inquirer = require("inquirer");
 var figlet = require('figlet');
 const chalk = require('chalk');
 
-let currentWord = new Word();
-let guessedArray = [];
-let randomWord = '';
-let guesses = 7;
-let feedback = '';
-const dash = chalk.red("=================================================================================");
+var currentWord = new Word();
+var guessedArray = [];
+var randomWord = '';
+var guesses = 7;
+var feedback = '';
+const dash = chalk.blue("=================================================================================");
 const title = [
     " _    _               _   _____                       _____                       ",
     "| |  | |             | | |  __ \\                     |  __ \\                      ",
@@ -21,14 +21,14 @@ const title = [
 ]
 
 // randomly choose word and store in Word.letters array
-const wordList =
-    ['word', 'game', 'node', 'react', 'html', 'css', 'alphabet', 'prestige', 'javascript',
-        'jquery', 'bootstrap', 'flexbox', 'coding', 'developer', 'programmer', 'computer',
-    'keyboard', 'mouse', 'monitor', 'tablet', 'smartphone'];
-// var wordList =
-//     ['html', 'css'];
+// const wordList =
+//     ['word', 'game', 'node', 'react', 'html', 'css', 'alphabet', 'prestige', 'javascript',
+//         'jquery', 'bootstrap', 'flexbox', 'coding', 'developer', 'programmer', 'computer',
+//     'keyboard', 'mouse', 'monitor', 'tablet', 'smartphone'];
+var wordList =
+    ['html', 'css'];
 
-const game = {
+var game = {
 
     startGame: function () {
         guessedArray = [];
@@ -54,7 +54,7 @@ const game = {
         var displayWord = displayWordArray.join(" ").toUpperCase();
         console.log('\033[2J'); // clears screen
         var statusLine = "\n\t" + dash + "\n";
-        statusLine += "\t" + chalk.yellow(title.join("\n\t"));
+        statusLine += "\t" + title.join("\n\t");
         statusLine += "\n\t" + dash + "\n\n";
         statusLine += "\n\n\t\t" + displayWord + "\n\n";
         statusLine += "\t\tLetters Guessed: " + guessedArray.join(", ") + "\n";

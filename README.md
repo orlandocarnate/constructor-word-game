@@ -2,6 +2,7 @@
 A Word Guess command-line game using constructor functions using Node.js with Inquirer or Prompt NPMs installed.
 
 ## Programmer's Notes
+
 * .every() [w3schools](https://www.w3schools.com/jsref/jsref_every.asp)
     * If every word letter object is *TRUE* then you win.
     EX:
@@ -27,6 +28,12 @@ function displayStatus(argArray) {
 ...
 }
 ```
+
+## Other methods to try:
+
+* `%s` string formatting. Ex: `console.log("%s was born last year", (name))`
+
+
 ## Special Characters [w3schools](https://www.w3schools.com/js/js_strings.asp)
 * `\t` addes a horizontal tab to a string.
 * `console.log('\033[2J');` clears the console.
