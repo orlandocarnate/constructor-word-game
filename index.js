@@ -10,7 +10,7 @@ let guessedArray = [];
 let randomWord = '';
 let guesses = 7;
 let feedback = '';
-const dash = chalk.red("=================================================================================");
+const dash = chalk.red(" =====================================================================================");
 const title = [
     " _    _               _   _____                       _____                       ",
     "| |  | |             | | |  __ \\                     |  __ \\                      ",
@@ -53,9 +53,15 @@ const game = {
         });
         var displayWord = displayWordArray.join(" ").toUpperCase();
         console.log('\033[2J'); // clears screen
-        var statusLine = "\n\t" + dash + "\n";
-        statusLine += "\t" + chalk.yellow(title.join("\n\t"));
-        statusLine += "\n\t" + dash + "\n\n";
+        console.log("\n" + dash + "\n\n");
+        console.log(chalk.yellow(figlet.textSync('Word Guess Game!', {
+            // font: 'Ghost',
+            kerning: 'fitted',
+            horizontalLayout: 'default',
+            verticalLayout: 'default'
+        })));
+        // statusLine += "\t" + chalk.yellow(title.join("\n\t"));
+        var statusLine = "\n" + dash + "\n";
         statusLine += "\n\n\t\t" + displayWord + "\n\n";
         statusLine += "\t\tLetters Guessed: " + guessedArray.join(", ") + "\n";
         statusLine += "\t\tGuesses left: " + guesses + "\n";
