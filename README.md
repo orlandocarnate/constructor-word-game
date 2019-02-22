@@ -1,10 +1,13 @@
 # constructor-word-game
-A Word Guess command-line game using constructor functions using Node.js with Inquirer or Prompt NPMs installed.
+A Node.js Word Guess command-line game using constructor functions and Inquirer NPM installed.
 
 # NPM Modules Used
 * [Inquirer](https://www.npmjs.com/package/inquirer) A collection of common interactive command line user interfaces.
 * [Figlet](https://www.npmjs.com/package/figlet) for creating FIGfonts or ASCII art [Check online demo](http://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20)
 * [Chalk](https://www.npmjs.com/package/chalk) adds color to the console.
+
+## Gameplay
+![Gif Animation](assets/word-game.gif)
 
 ## Programmer's Notes
 
