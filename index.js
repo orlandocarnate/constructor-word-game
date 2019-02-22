@@ -10,7 +10,7 @@ let guessedArray = [];
 let randomWord = '';
 let guesses = 7;
 let feedback = '';
-const dash = chalk.red(" =====================================================================================");
+const dash = chalk.red(" ==================================================================================");
 // const title = [
 //     " _    _               _   _____                       _____                       ",
 //     "| |  | |             | | |  __ \\                     |  __ \\                      ",
@@ -21,12 +21,12 @@ const dash = chalk.red(" =======================================================
 // ]
 
 // randomly choose word and store in Word.letters array
-// const wordList =
-//     ['word', 'game', 'node', 'react', 'html', 'css', 'alphabet', 'prestige', 'javascript',
-//         'jquery', 'bootstrap', 'flexbox', 'coding', 'developer', 'programmer', 'computer',
-//     'keyboard', 'mouse', 'monitor', 'tablet', 'smartphone'];
-var wordList =
-    ['one two', 'css'];
+const wordList =
+    ['ice cream', 'game', 'node', 'react', 'html', 'css', 'alphabet', 'prestige', 'javascript',
+        'jquery', 'bootstrap', 'flexbox', 'coding', 'developer', 'programmer', 'computer',
+    'keyboard', 'mouse', 'monitor', 'tablet', 'smartphone'];
+// var wordList =
+//     ['one two', 'css'];
 
 const game = {
 
@@ -47,21 +47,19 @@ const game = {
     },
 
     displayStatus: function () {
-        var displayWordArray = [];
         console.log('\033[2J'); // clears screen
-        console.log("\n" + dash + "\n\n");
+        console.log("\n" + dash + "\n");
         console.log(chalk.yellow(figlet.textSync('Word Guess Game!', {
-            // font: 'Ghost',
+            font: 'Small Slant',
             kerning: 'fitted',
-            horizontalLayout: 'default',
+            horizontalLayout: 'fitted',
             verticalLayout: 'default'
         })));
-        // statusLine += "\t" + chalk.yellow(title.join("\n\t"));
-        var statusLine = "\n" + dash + "\n";
-        statusLine += "\n\n\t\t" + currentWord.getString() + "\n\n";
-        statusLine += "\t\tLetters Guessed: " + guessedArray.join(", ") + "\n";
-        statusLine += "\t\tGuesses left: " + guesses + "\n";
-        statusLine += "\n\t\t" + feedback + "\n\n"
+        var statusLine = dash + "\n";
+        statusLine += "\n\n\t\t" + chalk.green(currentWord.getString()) + "\n\n";
+        statusLine += chalk.yellow("\t\tLetters Guessed: ") + chalk.red(guessedArray.join(", ")) + "\n";
+        statusLine += chalk.yellow("\t\tGuesses left: ") + chalk.red(guesses) + "\n";
+        statusLine += "\n\t\t" + chalk.blue(feedback) + "\n\n"
         console.log(statusLine); // display status section
 
     },
@@ -157,6 +155,9 @@ const game = {
             if (answers.playAgain) {
 
                 game.startGame();
+            } 
+            else {
+                console.log(chalk.green("Goodbye!"));
             }
         });
     },
