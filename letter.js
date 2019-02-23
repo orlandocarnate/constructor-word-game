@@ -9,12 +9,16 @@ var Letter = function (underlyingChar) {
         } else if (this.underlyingChar === ' ') {
             this.guessedChar = true;
             return " ";
+        } else if (this.underlyingChar === '-') {
+            this.guessedChar = true;
+            return "-";
         }
         else {
             return "_";
         }
+
     };
-    this.checkChar = arg => {
+    this.checkChar = function (arg) {
         // if the guessed char === wordChar
         if (this.underlyingChar.toUpperCase() === arg.toUpperCase()) {
             this.guessedChar = true;

@@ -11,20 +11,11 @@ let randomWord = '';
 let guesses = 7;
 let feedback = '';
 const dash = chalk.red(" ==================================================================================");
-// const title = [
-//     " _    _               _   _____                       _____                       ",
-//     "| |  | |             | | |  __ \\                     |  __ \\                      ",
-//     "| |  | | ___  _ __ __| | | |  \\/_   _  ___  ___ ___  | |  \\/ __ _ _ __ ___   ___  ",
-//     "| |/\\| |/ _ \\| '__/ _` | | | __| | | |/ _ \\/ __/ __| | | __ / _` | '_ ` _ \\ / _ \\ ",
-//     "\\  /\\  / (_) | | | (_| | | |_\\ \\ |_| |  __/\\__ \\__ \\ | |_\\ \\ (_| | | | | | |  __/ ",
-//     " \\/  \\/ \\___/|_|  \\__,_|  \\____/\\__,_|\\___||___/___/  \\____/\\__,_|_| |_| |_|\\___| "
-// ]
 
 // randomly choose word and store in Word.letters array
 const wordList =
-    ['ice cream', 'game', 'node', 'react', 'html', 'css', 'alphabet', 'prestige', 'javascript',
-        'jquery', 'bootstrap', 'flexbox', 'coding', 'developer', 'programmer', 'computer',
-    'keyboard', 'mouse', 'monitor', 'tablet', 'smartphone'];
+    ['Ready Player One', 'Star Wars', 'Star Trek', 'Inception', 'The Dark Knight', 'Iron Man', 
+    'Captain America', 'Enter the Dragon', 'Wonder Woman', 'Spider-Man', 'The Matrix', 'The Last Starfighter'];
 // var wordList =
 //     ['one two', 'css'];
 
@@ -49,12 +40,18 @@ const game = {
     displayStatus: function () {
         console.log('\033[2J'); // clears screen
         console.log("\n" + dash + "\n");
-        console.log(chalk.yellow(figlet.textSync('Word Guess Game!', {
-            font: 'Small Slant',
-            kerning: 'fitted',
-            horizontalLayout: 'fitted',
-            verticalLayout: 'default'
-        })));
+        console.log(
+            // chalk module
+            chalk.yellow(
+                // figlet module
+                figlet.textSync('Word Guess Game!', {
+                    font: 'Small Slant',
+                    kerning: 'fitted',
+                    horizontalLayout: 'fitted',
+                    verticalLayout: 'default'
+                })
+            )
+        );
         var statusLine = dash + "\n";
         statusLine += "\n\n\t\t" + chalk.green(currentWord.getString()) + "\n\n";
         statusLine += chalk.yellow("\t\tLetters Guessed: ") + chalk.red(guessedArray.join(", ")) + "\n";
@@ -67,7 +64,8 @@ const game = {
     validInput: function (char) {
         if (char.length === 1 && ((char.charCodeAt(0) >= 65 && char.charCodeAt(0) <= 90) ||
             (char.charCodeAt(0) >= 97 && char.charCodeAt(0) <= 122))) {
-            // check if char is already guessed
+                
+            // check if char is in guessedArray
             if (guessedArray.indexOf(char.toUpperCase()) === -1) {
                 return true;
             } else {
@@ -107,7 +105,7 @@ const game = {
                 game.playAgain();
                 return;
             }
-            
+
             // see if any matches are found
             if (found === false) {
                 // reduce guesses if no match
@@ -133,14 +131,14 @@ const game = {
         }
 
     },
-    
+
     runInquirer: function () {
         inquirer.prompt([{
             type: "input",
             name: "userInput",
             message: "Guess a letter: "
         }])
-        .then(answer => {game.compareInput(answer.userInput)});
+            .then(answer => { game.compareInput(answer.userInput) });
     },
 
     playAgain: function () {
@@ -155,7 +153,7 @@ const game = {
             if (answers.playAgain) {
 
                 game.startGame();
-            } 
+            }
             else {
                 console.log(chalk.green("Goodbye!"));
             }
@@ -175,8 +173,6 @@ const game = {
         game.startGame();
         // process.exit();
     },
-
-
 }
 
 game.startGame();

@@ -5,7 +5,7 @@ var Word = function () {
     // array of letter OBJECTS of current word
     this.wordObjects = [];
 
-    this.createObjects = word => {
+    this.createObjects = function (word) {
         var tempArray = word.split("");
         this.wordObjects = tempArray.map(item => {
             return new Letter(item);
@@ -20,7 +20,9 @@ var Word = function () {
     }
 
     // takes char argument and calls guess function on each letter
-    this.guessChar = char => { Letter.checkChar(char); }
+    this.guessChar = function (char) {
+        Letter.checkChar(char);
+    }
 };
 
 // export
